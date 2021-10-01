@@ -14,21 +14,27 @@ let food = {
     y: Math.floor(Math.random()*15+1)*box
 }
 
+//Criacao do fundo do jogo (Background)
 function criarBG(){
     context.fillStyle = "lightgreen";
     context.fillRect(0,0,16*box, 16*box);
 }
+
+//Criacao e crescimento da snake
 function criarSnake(){
     for (var i=0;i<snake.length;i++){
         context.fillStyle = "green";
         context.fillRect(snake[i].x,snake[i].y,box, box);
     }
 }
+
+//Criacao do pixel da comida
 function drawFood(){
     context.fillStyle = "red";
     context.fillRect(food.x,food.y,box,box);
 }
 
+//Comandos com Enderecos para as setas do teclado
 document.addEventListener('keydown',update);
 function update(event){
     if(event.keyCode == 37 && direction!="right"){
@@ -74,6 +80,7 @@ function iniciarJogo(){
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
+    //Movimentos da snake
     if(direction =="right"){
         snakeX += box;
     }
@@ -87,6 +94,7 @@ function iniciarJogo(){
         snakeY += box;
     }
 
+    //Se a cabeca da snake estiver no mesmo pixel da comida, a comida reaparece em um novo pixel de forma aleatoria
     if(snakeX!=food.x || snakeY!=food.y){
         snake.pop();
     }else{
